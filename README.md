@@ -1,2 +1,2 @@
-#RESTAURANT BILL
+#ELECTRICITY BILL
  Management System
