@@ -1,177 +1,170 @@
 #include <iostream>
+#include <string>
 using namespace std;
-
-// this is customer registration function
-void customerregister(string &name, int &order, string &contactnumber, int &person)
+ 
+  //Customer Registeration form:
+void Customerregistration(string &name, string &id, int &type, int &meter)
 {
-	cout <<"Enter Your name:";
-	cin >>name;
-	cout <<"Enter Yor contact Number:";
-	cin>>contactnumber;
-	cout <<"Place your Order:";
-	cout <<"\n 1.Dine-in:";
-	cout <<"\n 2.Take Away:\n";
-	cin>>order;
-	cout <<"Enter Number of Person:";
-	cin >>person;
+    cout << "\nWhat is your Name: ";
+    cin >> name;
+    cout << "\nWhat is your ID: ";
+    cin >> id;
+    cout << "\nEnter Customer Type:\n";
+    cout << "1.Household\n";
+    cout << "2.Commercial\n";
+    cin >> type;
+    cout << "\nWhat is the Meter Type:\n";
+    cout << "1.First Meter\n";
+    cout << "2.Second Meter\n";
+    cin >> meter;
+	cout <<"\n Your Registration is successfully:\n";
+	cout <<"\n\n_____________--------------________________\n"<<endl;
 }
-
-// this is the list of food you can order
-string fooditem[8]{
-    "Chicken Burger",
-    "Zinger Burger",
-    "Pizza Small",
-    "Pizza Large",
-    "Chicken Biryani",
-    "BBQ Platter",
-    "Fries",
-    "Cold Drink"
-};
-
-// this is the price of the food you can order
- double price[8]{
-	  	450,550,900,1800,350,1200,250,120
-};
-
-// this function is used to order the food 
-double placeorder(){
-	
-	int foodNo;
-	int quantity;
-	char more;
-	double totalbill=0;
-	do{
-	cout <<"Enter the The Number Of Food items:";
-	cin >>foodNo;
-	cout <<"Enter the quantity of the Food items:";
-	cin >>quantity;
-	
-	double Totalitem=price[foodNo-1]*quantity;
-	 totalbill+=Totalitem;
-	cout <<"\nYour Ordered:";
-        cout<< fooditem[foodNo - 1] << endl;
-    cout << "Price: Rs. "
-         << price[foodNo - 1] << endl;
-    cout << "Quantity: "
-         << quantity << endl;
-          cout << "Total Price: Rs. "
-             << Totalitem << endl;
-    cout <<"Order More items (yes/no):";
-        cin>>more;
-    }while(more=='y'|| more=='Y');
-     cout << "\nTotal Bill: Rs. "
-         << totalbill << endl;
-    return totalbill;
-}
-
-// this is the service charge function
-double calculateservicecharge(double totalbill,int ordertype){
-
-    if(ordertype==1){
-   	return totalbill*0.10;
-   }else{
-   	return totalbill*0.05;
-   }
-}
-double calculategst(double totalbill){
-	return totalbill*0.16;
-}
-double calculatediscount(double totalbill){
-	if (totalbill>=3000 && totalbill <= 5000){
-		return totalbill * 0.05;
-	} else if (totalbill>5000 && totalbill<=10000){
-		return totalbill * 0.10;
-	} else if(totalbill >10000){
-		return totalbill*0.15;
-	}
+int  showmenu(){
+	cout <<"\n\t\tMain Menu:\n"<<endl;
+	cout <<"1.Calculate Monthly Electricity Bill:\n"<<endl;
+	cout <<"2.Apply for new Electricity Bill:\n"<<endl;
+	cout <<"3.View Customer Details:\n"<<endl;
+	cout <<"4.Exit Program:\n"<<endl;
 	return 0;
+	
 }
-
-// this is the Final bill function
-void displayfinalbill(double totalbill, int ordertype, string name, int person)
-{
-    double servicecharge = calculateservicecharge(totalbill, ordertype);
-    double gst = calculategst(totalbill);
-    double discount = calculatediscount(totalbill);
-
-    double Finalbill = totalbill + servicecharge + gst - discount;
-
-    cout << "\n========== RESTAURANT BILL ==========\n\n";
-    cout << "Customer Name: " << name << endl;
-    if(ordertype == 1){
-    	cout << "Order Type: Dine-in" << endl;
-	} else {
-		cout << "Order Type: Takeaway" << endl;
-	}  
-    cout << "Number of Persons: " << person << endl;
-    cout << "\nFood Bill: Rs. " << totalbill << endl;
-    cout << "Service Charges: Rs. " << servicecharge << endl;
-    cout << "GST: Rs. " << gst << endl;
-    cout << "Discount: Rs. " << discount << endl;
-    cout << "\n------------------------------------\n";
-    cout << "Total Payable Amount: Rs. " << Finalbill << endl;
-    cout << "Enjoy Your Meal :" << endl;
-    cout << "====================================\n";
+double unitslab(int unit){
+    	double bill;
+	    double slabrate[8]={12.21,14.53,31.51,38.41,41.62,43.04,44.18,49.10};
+         if (unit>=1 && unit <=100){
+     	        bill=slabrate[0] *unit;
+	                //cout <<"Your Electricity Bill is *****:"<<bill<<endl;
+	     }else if (unit>=101 && unit<=200){
+	        	 bill=slabrate[1] *unit;
+	 	             //cout <<"Your Electricity Bill is *****:"<<bill<<endl;
+      	 }else if (unit>=201 && unit<=300){
+      	   	    bill=slabrate[2] *unit;
+      	   	       //cout<<"Your Electricity Bill is *****:"<<bill<<endl;
+	     }else if (unit >=301 && unit <=400){
+			 bill=slabrate[3] *unit;
+				    //cout <<"Your Electrity Bill is *****:"<<bill<<endl;
+		 }else if (unit >=401 && unit <=500){
+			 bill=slabrate[4] *unit;
+				   // cout <<"Your Electrity Bill is *****:"<<bill<<endl;
+		 }else if (unit >=501 && unit <=600){
+				 bill=slabrate[5] *unit;
+				    //cout <<"Your Electrity Bill is *****:"<<bill<<endl;
+		 }else if (unit >=601 && unit <=700){
+				 bill=slabrate[6] *unit;
+				    //cout <<"Your Electrity Bill is *****:"<<bill<<endl;
+		 } else {
+			 bill=slabrate[7] *unit;
+			      //cout <<"Your Electricity Bill is *****:"<<bill<<endl;
+		 }
+			return bill;
+			
 }
-// this is customer details function
-void customerdetails(string &name, int &order, string &contactnumber, int &person){
-
-	 cout <<"=============== CUSTOMER DETAILS ==============\n"<<endl;
-	 cout <<"\nName :"<<name<<endl;
-	 cout <<"\nContact Number:"<<contactnumber<<endl;
-	 cout <<"\nNo Of Person:"<<person<<endl;
-	 if (order==1){
-	 	cout <<"\n Order Type: Dine-in:"<<endl;
-	 }else{
-	 	cout <<"\n Order Type : Take Away:"<<endl;
-	 }	
+double gstbill(double bill){
+        double gst;
+    	gst=bill*18/100;
+	    return gst;
+	
+}
+double electricyduty(double bill){
+	    double duty;
+	    duty=(bill*1.5/100);
+	    return duty;
+	
+}
+double incometax(double bill , int type){
+	   double household,commercial,tax;
+	      if (type==household){
+		     tax=(bill*10/100);
+       	 }else if(type==commercial){
+		     tax=(bill*15/100);
+       	 }
+	    return tax;
+}
+double fixcharge(int unit){
+	
+	   int charge[5]={200,400,600,800,1000};
+	   
+	   if (unit>=300 && unit<=400){
+		charge[0];
+	   }else if (unit>=401 && unit<=500){
+		charge[1];
+       }else if (unit>=501 && unit<=600){
+		charge[2];
+       }else if (unit>=601 && unit<=700){
+		charge[3];
+       }else {
+    	charge[4];
+	   }
 }
 
 int main (){
-	string name;
-	int order,person;
-	string contactnumber;
-	int choise;
-	double totalbill=0;
-   customerregister(name, order,contactnumber, person);
-     do {
-     	cout <<"\n\t\t\t\t\=============== MAIN MENU ===============\n";
-        cout <<"1.View Food Items:\n";
-        cout <<"2.Place Order:\n";
-        cout <<"3.Calculate Bill:\n";
-        cout <<"4.View Customer Details:\n";
-        cout <<"5.Exit Program:\n";
-        cout <<"Enter Your Choise:\n";
-        cin>>choise;
-        
-    switch (choise){
-    case 1:
-        cout << "\n===== FOOD MENU =====\n";
-        for(int i = 0; i < 8; i++)
-        {
-            cout << i + 1 << ". " << fooditem[i] <<"==Rs:"<<price[i]<< endl;
-        }
-        break;   	
-    case 2:
-    	 cout << "\n===== FOOD MENU =====\n";
-        for(int i = 0; i < 8; i++)
-        {
-            cout << i + 1 << ". " << fooditem[i] <<"==Rs:"<<price[i]<< endl;
-        }
-    	 totalbill=placeorder();
-    	break;
-    case 3:
-    	 displayfinalbill(totalbill, order, name, person);
-        break;
-    
-    case 4:
-        customerdetails(name, order, contactnumber, person);
-        break;
-    case 5:
-    	break;
-	}
-	 }while(choise!=5);
-	
-	return 0;
-}
+    string name, id;
+    int type;
+    int meter;
+	int choice;
+	int unit;
+	double meterrent=250;
+	double tvfees=35;
 
+
+    Customerregistration(name, id, type, meter);
+	
+
+	  do {
+	  	
+	  	showmenu();
+	  	
+	  	cout <<"Enter Your Choice:";
+	  	cin >>choice;
+	  	if (choice==1){
+            	int unit;
+            	int type;
+            		cout <<"Enter Number of Unit Counsumed:";
+                	cin>>unit;
+            	    cout <<"Enter Customer Type:"<<endl;
+            	    cout <<"1.Household:\n";
+            	    cout <<"2.Commercial:\n";
+            	    cin >>type;
+            	    
+	  		   	double bill= unitslab(unit);
+        		double duty=electricyduty(bill);
+	  			double gst=gstbill(bill);
+	  			double tax=incometax(bill, type);
+	  			double fixed=fixcharge(unit);
+	  	         //Final BILL
+	  	         double totalbill;
+	  	         totalbill=bill + gst+duty+tax +fixed+meterrent+tvfees;
+	  	         //Output
+	  	         
+	  	         cout <<"\n =============== LESCO ELECTRICITY BILL ===============\n\n\n\n\n";
+                            cout << "Customer Name:Rs.__________ " << name <<"\n\n";
+                             cout << "Customer ID:Rs.__________ " << id <<"\n\n";
+                             cout << "House Type:__________ " << type <<"\n\n";
+                             cout << "Meter Type:__________ " << meter <<"\n\n";
+                    cout << "Base Bill Rs.___________" << bill <<"\n\n";
+                    cout << "GST Rs.___________ " << gst <<"\n\n";
+                    cout << "Electricity Duty Rs.__________ " << duty <<"\n\n";
+                    cout << "Income Tax Rs.__________" << tax <<"\n\n";
+                    cout << "Fixed Charges Rs.__________" << fixed <<"\n\n";
+                    cout << "Meter Rent Rs.__________" << meterrent <<"\n\n";
+                    cout << "TV Fees Rs.__________" << tvfees <<"\n\n";
+                    cout << "========Total Electricity Bill======___________ " << totalbill <<"\n\n\n\n\n";
+                    
+                      cout <<"===================================================";
+		}else if (choice==2){
+	string name, id;
+    int type;
+    int meter;
+    Customerregistration(name, id, type, meter);
+		} else if (choice==3){
+		  	cout <<"View Customer Details:";
+		}else if (choice==4){
+		  	cout <<"Exit Program";
+		}else {
+		  	cout <<"Invalid Option:";
+		}
+	  	
+	  } while (choice!=4);
+	 return 0;
+}
